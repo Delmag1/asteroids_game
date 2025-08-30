@@ -45,7 +45,32 @@ def main():
             if player.collide(asteroid):
                 print("Game over!")
                 print(f"Score: {score}")
-                sys.exit()
+               
+               
+                font = pygame.font.SysFont(None, 48)
+                game_over_text = font.render("Game Over!", True, (255, 0, 0))
+                score_text = font.render(f"Score: {score}", True, (255, 255, 255))
+                prompt_text = font.render("Press R to Restart or Q to Quit", True, (255, 255, 255))
+
+                screen.fill((0, 0, 0))
+                screen.blit(game_over_text, (100, 100))
+                screen.blit(score_text, (100, 200))
+                screen.blit(prompt_text, (100, 300))
+                pygame.display.flip()
+
+                waiting = True
+                while waiting:
+                    for event in pygame.event.get():
+                        if event.type == pygame.QUIT:
+                            pygame.quit()
+                            exit()
+                        if event.type == pygame.KEYDOWN:
+                            if event.key == pygame.K_r:
+                                waiting = False  # Restart game
+                            elif event.key == pygame.K_q:
+                                pygame.quit()
+                                exit()
+
             for shot in shots:
                 if shot.collide(asteroid):
                     shot.kill()
