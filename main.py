@@ -13,6 +13,7 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
+    font = pygame.font.SysFont(None, 48)
     dt = 0
     player = Player(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
 
@@ -33,6 +34,8 @@ def main():
                 return
         screen.fill("black")
         dt = clock.tick(60) / 1000  # Get delta time in seconds
+        score_text = font.render(f"Score: {score}", True, (255, 255, 255))
+        screen.blit(score_text, (10, 10))
         player.move(dt)
         player.update(dt)
         player.draw(screen)
